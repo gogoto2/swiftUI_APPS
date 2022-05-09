@@ -48,7 +48,8 @@ struct AppRow: View {
     {
         guard let url = URL(string: self.appInfo.artworkUrl60) else { return }
         URLSession.shared.dataTask(with: url){ (data, response, error) in
-            if let image = UIImage(data: data!){
+            guard let data = data else{ return }
+            if let image = UIImage(data: data){
                 self.remoteImage = image
             }
             else{
